@@ -32,5 +32,10 @@ namespace GCTest
             BEvent?.Invoke(msg, EventArgs.Empty);
         }
 
+        public void ResetEvent()
+        {
+            BEvent = null;
+        }
+
     }
 }

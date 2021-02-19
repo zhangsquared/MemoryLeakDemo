@@ -8,21 +8,23 @@ namespace GCTest
 {
     class Program
     {
+        /// <summary>
+        /// A is subscriber; B is publisher
+        /// </summary>
         static void Main(string[] args)
         {
             ITest[] tests = new ITest[]
             {
                 new Test1(), // baseline
                 new Test2(), // demo for memory leak
-                new Test3(), // Dispose() method
+                new Test3(), // Dispose() method on subscriber
+                new Test4(), // reset event on publisher
             };
 
             foreach (ITest t in tests)
             {
-                double remainingInMB = t.Run();
-
-                Console.WriteLine();
                 Console.WriteLine("[x] " + t.GetType().Name);
+                double remainingInMB = t.Run();
                 Console.WriteLine($"Remaining memory: {remainingInMB} MB");
                 if (remainingInMB > 1)
                 {
