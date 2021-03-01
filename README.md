@@ -10,4 +10,5 @@ A is subscriber; B is publisher
 * Test2: demo for memory leak
 * Test3: use Dispose() method on subscriber; it will work if called manually; it will not work passively in Finalizer
 * Test4: reset event on publisher; it will work if called manually
-* Test5 (TODO): use weak reference
+* Test5: Dispose() method on a derived class
+* Test6: weak reference

@@ -8,9 +8,9 @@ namespace GCTest
 {
     public class LargeObjectA : IDisposable
     {
-        private readonly string name;
+        protected readonly string name;
         private readonly StringBuilder stringBuilder;
-        private LargeObjectB b;
+        protected LargeObjectB b;
 
         public LargeObjectA(string name)
         {
@@ -38,19 +38,23 @@ namespace GCTest
             }
         }
 
-        private void BindEvent()
+        protected virtual void BindEvent()
         {
             if (b != null)
+            {
                 b.BEvent += OnBEvent;
+            }
         }
 
-        private void UnbindEvent()
+        protected virtual void UnbindEvent()
         {
             if (b != null)
+            {
                 b.BEvent -= OnBEvent;
+            }
         }
 
-        private void OnBEvent(object sender, EventArgs e)
+        protected virtual void OnBEvent(object sender, EventArgs e)
         {
             string str = sender?.ToString() ?? string.Empty;
             Console.WriteLine($"...{name} responded for {str}");
@@ -59,8 +63,8 @@ namespace GCTest
         #region IDisposable
         public void Dispose()
         {
-            Console.WriteLine($"{name} dispose");
             UnbindEvent();
+            Console.WriteLine($"{name} dispose");
         }
         #endregion
     }

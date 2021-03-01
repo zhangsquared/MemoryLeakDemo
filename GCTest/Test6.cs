@@ -6,21 +6,15 @@ using System.Threading.Tasks;
 
 namespace GCTest
 {
-    /// <summary>
-    /// Test Dispose() function
-    /// </summary>
-    public class Test3 : ITest
+    public class Test6 : ITest
     {
         /// <summary>
-        /// I add Dispose() function to Finalizer
-        /// I manuallly called Dispose() on a0
-        /// but I didn't call on a1
-        /// I would like to see whether the Finalizer will passively unsubscribe the event
-        /// 
-        /// Test result:
-        /// A finalizer will not work: 
-        /// the garbage collector won't call it because the event source still holds a reference to our object!
+        /// https://paulstovell.com/weakevents/
+        /// https://michaelscodingspot.com/5-techniques-to-avoid-memory-leaks-by-events-in-c-net-you-should-know/
+        /// https://ladimolnar.com/2015/09/14/the-weak-event-pattern-is-dangerous/
+        /// https://www.codeproject.com/Articles/29922/Weak-Events-in-C
         /// </summary>
+        /// <returns></returns>
         public double Run()
         {
             LargeObjectB b = new LargeObjectB();
@@ -37,14 +31,12 @@ namespace GCTest
 
         private void CreateAs(LargeObjectB b)
         {
-            LargeObjectA a0 = new LargeObjectA("a0");
-            LargeObjectA a1 = new LargeObjectA("a1");
+            LargeObjectA a0 = new WeakRefA("a0");
+            LargeObjectA a1 = new WeakRefA("a1");
             a0.B = b;
             a1.B = b;
 
             b.TriggerEvent("1");
-
-            a0.Dispose();
         }
 
     }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DerivedA.cs" />
     <Compile Include="ITest.cs" />
     <Compile Include="LargeObjectA.cs" />
     <Compile Include="LargeObjectB.cs" />
@@ -52,7 +53,11 @@
     <Compile Include="Test2.cs" />
     <Compile Include="Test3.cs" />
     <Compile Include="Test4.cs" />
+    <Compile Include="Test5.cs" />
+    <Compile Include="Test6.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="WeakEventHandler.cs" />
+    <Compile Include="WeakRefA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

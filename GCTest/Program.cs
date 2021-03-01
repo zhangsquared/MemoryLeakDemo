@@ -19,6 +19,8 @@ namespace GCTest
                 new Test2(), // demo for memory leak
                 new Test3(), // Dispose() method on subscriber
                 new Test4(), // reset event on publisher
+                new Test5(), // compare with Test3, however I am using a derived class to test unsubscribe
+                new Test6(), // use weak event handler with regular events
             };
 
             foreach (ITest t in tests)
@@ -28,7 +30,7 @@ namespace GCTest
                 Console.WriteLine($"Remaining memory: {remainingInMB} MB");
                 if (remainingInMB > 1)
                 {
-                    Console.WriteLine("There is a leak!!!");
+                    Console.WriteLine("[!] There is a leak!!!");
                 }
 
                 Util.GCCollect();
