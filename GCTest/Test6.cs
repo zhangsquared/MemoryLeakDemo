@@ -13,6 +13,7 @@ namespace GCTest
         /// https://michaelscodingspot.com/5-techniques-to-avoid-memory-leaks-by-events-in-c-net-you-should-know/
         /// https://ladimolnar.com/2015/09/14/the-weak-event-pattern-is-dangerous/
         /// https://www.codeproject.com/Articles/29922/Weak-Events-in-C
+        /// It is good, but it's random and unreliable
         /// </summary>
         /// <returns></returns>
         public double Run()
@@ -22,7 +23,7 @@ namespace GCTest
             CreateAs(b);
             Util.GCCollect();
 
-            b.TriggerEvent("2");
+            b.TriggerEvent("2"); // result: a0 and a1 will NOT respond here
             Util.GCCollect();
             double n1 = Util.GCUsageInMB();
 
@@ -37,6 +38,10 @@ namespace GCTest
             a1.B = b;
 
             b.TriggerEvent("1");
+
+            Util.GCCollect();
+
+            b.TriggerEvent("1.1"); // result: a0 and a1 will still respond here
         }
 
     }
